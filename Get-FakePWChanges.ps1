@@ -5,7 +5,7 @@
 
 Param
  (
-    [atring]$Domain = $env:userdnsdomain,
+    [string]$Domain = $env:userdnsdomain,
     [switch]$CheckADAdmins,
     [switch]$AllUsers
  )
@@ -13,7 +13,7 @@ Param
 IF ( ($CheckADAdmins -eq $False) -AND ($AllUsers -eq $False) )
  { [switch]$CheckADAdmins = $True }
 
-[string]$DomainDC = (Get-ADDomainController -Discover -DomainName $Domain).Name
+[string]$DomainDC = (Get-ADDomainController -Discover -DomainName $Domain).HostName
 [array]$DomainInfo = Get-ADDomain -Server $DomainDC
 
 IF ($CheckADAdmins -eq $True)
@@ -65,4 +65,5 @@ IF ($AllUsers -eq $True)
  { 
     Write-Host "$Domain Domain Accounts with Fake Password Changes:" -ForegroundColor Cyan
     $ADAccountMetaDataArray | Where-Object {$_.PasswordChanged -eq $False} | Sort AccountID | Format-Table -AutoSize
+
  }
