@@ -1,11 +1,11 @@
 ﻿# PowerShell script authored by Sean Metcalf (@PyroTek3)
 # 2026-02-26
-# Last Updated: 2026-03-04
+# Last Updated: 2026-03-06
 # Script provided as-is
 
 Param
  (
-    [atring]$Domain = $env:userdnsdomain,
+    [string]$Domain = $env:userdnsdomain,
     [switch]$CheckADAdmins,
     [switch]$AllUsers
  )
